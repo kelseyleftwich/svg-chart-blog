@@ -58,14 +58,14 @@ const LineChart = ({
       const xCoordinate = padding + ratio * (width - padding * 2);
 
       return (
-        <>
+        <React.Fragment key={index}>
           <polyline
             fill="none"
             stroke="#ccc"
             strokeWidth=".5"
             points={`${xCoordinate},${startY} ${xCoordinate},${endY}`}
           />
-        </>
+        </React.Fragment>
       );
     });
   };
@@ -80,14 +80,14 @@ const LineChart = ({
       const yCoordinate = chartHeight - chartHeight * ratio + padding;
 
       return (
-        <>
+        <React.Fragment key={index}>
           <polyline
             fill="none"
             stroke={"#ccc"}
             strokeWidth=".5"
             points={`${startX},${yCoordinate} ${endX},${yCoordinate}`}
           />
-        </>
+        </React.Fragment>
       );
     });
   };
@@ -95,11 +95,12 @@ const LineChart = ({
   const LabelsXAxis = () => {
     const y = height - padding + FONT_SIZE * 2;
 
-    return data.map(element => {
+    return data.map((element, index) => {
       const x =
         (element.x / maximumXFromData) * chartWidth + padding - FONT_SIZE / 2;
       return (
         <text
+          key={index}
           x={x}
           y={y}
           style={{
@@ -124,6 +125,7 @@ const LineChart = ({
         chartHeight - chartHeight * ratio + padding + FONT_SIZE / 2;
       return (
         <text
+          key={index}
           x={x}
           y={yCoordinate}
           style={{
